@@ -6,32 +6,30 @@ const mongoose = require('mongoose');
 // Load environment variables
 dotenv.config();
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000; // Default to 3000 if PORT is not defined
 const MONGO_URI = process.env.MONGO_URI;
 
 const app = express();
 
 // Apply CORS middleware correctly
 app.use(cors());
+app.use(express.json()); // Add this line to parse JSON bodies
 
 // Connect to MongoDB Atlas
 mongoose
     .connect(MONGO_URI)
     .then(() => {
-
-
         console.log('DB connected successfully');
     })
     .catch((err) => {
         console.error('DB connection error:', err);
     });
 
-
-
 const userSchema = new mongoose.Schema({
     title: String,
     age: Number,
 });
+
 const UserModel = mongoose.model("collection-1", userSchema);
 
 app.get('/', async (req, res) => {
@@ -46,8 +44,7 @@ app.get('/', async (req, res) => {
 
 app.get('/getUsers/:id', async (req, res) => {
     try {
-        // Find a single document by _id
-        const userData = await UserModel.findById(req.params.id); // Use findById method
+        const userData = await UserModel.findById(req.params.id);
 
         if (!userData) {
             return res.status(404).json({ message: "User not found" });
@@ -60,7 +57,5 @@ app.get('/getUsers/:id', async (req, res) => {
     }
 });
 
-// Start the server
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+// Export the Express app as a serverless function
+module.exports = app;
