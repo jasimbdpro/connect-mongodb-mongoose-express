@@ -42,20 +42,22 @@ app.get('/', async (req, res) => {
     }
 });
 
-app.get('/getUsers/:id', async (req, res) => {
+app.get('/', async (req, res) => {
+    const page = parseInt(req.query.page) || 1; // Default to page 1
+    const limit = parseInt(req.query.limit) || 10; // Default limit
+    const skip = (page - 1) * limit;
+
     try {
-        const userData = await UserModel.findById(req.params.id);
-
-        if (!userData) {
-            return res.status(404).json({ message: "User not found" });
-        }
-
+        const userData = await UserModel.find({})
+            .skip(skip)
+            .limit(limit);
         res.json(userData);
     } catch (error) {
-        console.error("Error fetching data: ", error);
+        console.error("Error fetching data:", error);
         res.status(500).send("Error fetching data");
     }
 });
+
 
 // Export the Express app as a serverless functionssss
 module.exports = app;
