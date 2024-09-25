@@ -18,10 +18,7 @@ app.use(cors());
 mongoose
     .connect(MONGO_URI)
     .then(() => {
-        // Start the server
-        app.listen(PORT, () => {
-            console.log(`Server is running on port ${PORT}`);
-        });
+
 
         console.log('DB connected successfully');
     })
@@ -61,4 +58,9 @@ app.get('/getUsers/:id', async (req, res) => {
         console.error("Error fetching data: ", error);
         res.status(500).send("Error fetching data");
     }
+});
+
+// Start the server
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
