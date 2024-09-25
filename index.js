@@ -57,5 +57,5 @@ app.get('/getUsers/:id', async (req, res) => {
     }
 });
 
-// Export the Express app as a serverless function
+// Export the Express app as a serverless functions
 module.exports = app;
