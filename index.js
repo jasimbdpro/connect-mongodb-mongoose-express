@@ -48,15 +48,14 @@ app.get('/', async (req, res) => {
     const skip = (page - 1) * limit;
 
     try {
-        const userData = await UserModel.find({})
-            .skip(skip)
-            .limit(limit);
+        const userData = await UserModel.find({}).skip(skip).limit(limit);
         res.json(userData);
     } catch (error) {
         console.error("Error fetching data:", error);
         res.status(500).send("Error fetching data");
     }
 });
+
 
 
 // Export the Express app as a serverless functionssss
