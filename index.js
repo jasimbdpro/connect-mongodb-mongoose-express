@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 // Load environment variables
 dotenv.config();
 
-const PORT = process.env.PORT || 7000;
+const PORT = process.env.PORT;
 const MONGO_URI = process.env.MONGO_URI;
 
 const app = express();
