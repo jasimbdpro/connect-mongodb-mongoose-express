@@ -40,7 +40,7 @@ const UserModel = mongoose.model("collection-1", userSchema);
 app.get('/', async (req, res) => {
     try {
         const userData = await UserModel.find({});
-        res.json(userData);
+        res.json({ "rules": "Use This Route to handle single data: /findusers/:id", "data": userData });
     } catch (error) {
         console.error("Error fetching data:", error);
         res.status(500).send("Error fetching data");
