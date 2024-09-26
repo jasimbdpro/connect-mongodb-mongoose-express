@@ -14,6 +14,9 @@ const app = express();
 // Apply CORS middleware correctly
 app.use(cors());
 
+// App Express JSON parse
+app.use(express.json())
+
 // Connect to MongoDB Atlas
 mongoose
     .connect(MONGO_URI)
@@ -99,11 +102,11 @@ app.put('/findusers/:id', async (req, res) => {
 
 
 app.post('/', async (req, res) => {
-    const { name, email, age } = req.body; // Adjust these fields based on your user model
+    const { title, age } = req.body; // Adjust these fields based on your user model
 
     try {
         // Create a new user instance
-        const newUser = new UserModel({ name, email, age });
+        const newUser = new UserModel({ title, age });
 
         // Save the user to the database
         await newUser.save();
