@@ -76,7 +76,7 @@ app.delete('/findusers/:id', async (req, res) => {
 
 
 
-app.put('/users/:id', async (req, res) => {
+app.put('/findusers/:id', async (req, res) => {
     const { name, email, age } = req.body; // Adjust these fields based on your user model
 
     try {
