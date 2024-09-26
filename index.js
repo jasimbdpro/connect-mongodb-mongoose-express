@@ -56,7 +56,7 @@ app.get('/findusers/:id', async (req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        res.json(userData);
+        res.status(200).json(userData);
     } catch (error) {
         console.error("Error fetching data: ", error);
         res.status(500).send("Error fetching data");
