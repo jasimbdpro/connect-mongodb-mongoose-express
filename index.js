@@ -98,7 +98,7 @@ app.put('/findusers/:id', async (req, res) => {
 
 
 
-app.post('/users', async (req, res) => {
+app.post('/', async (req, res) => {
     const { name, email, age } = req.body; // Adjust these fields based on your user model
 
     try {
