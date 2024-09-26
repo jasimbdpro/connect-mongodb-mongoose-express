@@ -77,12 +77,12 @@ app.delete('/findusers/:id', async (req, res) => {
 
 
 app.put('/findusers/:id', async (req, res) => {
-    const { name, email, age } = req.body; // Adjust these fields based on your user model
+    const { title, age } = req.body; // Adjust these fields based on your user model
 
     try {
         const updatedUser = await UserModel.findByIdAndUpdate(
             req.params.id,
-            { name, email, age }, // Fields to update
+            { title, age }, // Fields to update
             { new: true, runValidators: true } // Options
         );
 
